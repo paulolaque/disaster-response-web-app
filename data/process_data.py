@@ -40,6 +40,8 @@ def clean_data(df):
         else:
             features_list= np.append(features_list,inside[0].unique())
     categories_content.columns=features_list
+    categories_content=categories_content.astype(int)  
+    categories_content[categories_content>1]=1 # convert to binary
     df.drop(columns='categories',inplace=True)
     df=df.join(categories_content)
     categories_content=None #clean variable
